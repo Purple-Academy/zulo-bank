@@ -1,87 +1,97 @@
-# Welcome to React Router!
+# Zulo Bank
 
-A modern, production-ready template for building full-stack React applications using React Router.
+A banking application built as part of our college coursework.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+## Branch Strategy
 
-## Features
+This repo uses three long-lived branches:
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+| Branch        | Purpose                                                                                                                        |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `development` | Active work happens here. All feature branches merge into `development` first. Things can be a bit unstable - that's expected. |
+| `main`        | Stable, reviewed, tested code. Only updated from `development` once things are working. Protected - see below.                 |
+| `production`  | Snapshot of what's actually "live"/deployed. Updated manually and only from `main`, not part of everyday work.                 |
 
-## Getting Started
+### Everyday flow
 
-### Installation
+```
 
-Install the dependencies:
+feature-<branch_name> => development => main
+```
+
+You should almost never work directly on `main` or `production`. Nearly all day-to-day work happens on short-lived feature branches, which get merged into `development`.
+
+## Branch Protection
+
+The `main` branch is protected:
+
+- Direct pushes are **blocked** for everyone, including admins.
+- All changes must go through a **Pull Request(PR)**.
+- At least **1 approval** from a Code owner (`@DatoKhojava`, `@GiorgiGochitidze`, or `@Giorgi014`) is required before merging.
+- New commits pushed after approval **dismiss the previous approval** - it has to be re-reviewed.
+- Force pushes and branch deletion are blocked(`main`, `development`, and `production`).
+
+If you try to `git push origin main` directly, Github will reject it. This is intentional.
+
+## Workflow for Contributors
+
+1. **Start from `development`, not `main`:**
 
 ```bash
-npm install
+    git checkout development
+    git pull origin development
+    git checkout -b feature/short-description
 ```
 
-### Development
-
-Start the development server with HMR:
+2. **Make your changes, commit as you go:**
 
 ```bash
-npm run dev
+    git add .
+    git commit -m "(feat): add short description of what changed"
 ```
 
-Your application will be available at `http://localhost:5173`.
-
-## Building for Production
-
-Create a production build:
+3. **Push your branch:**
 
 ```bash
-npm run build
+    git push origin feature/short-description
 ```
 
-## Deployment
+4. **Open a Pull Request into `development`** on GitHub.
+   - Give it a clear title and description.
+   - Link any realted issue if applicable.
 
-### Docker Deployment
+5. **Get it reviewed and merged.**
+   - Once approved, merge via the GitHub UI (not locally).
+   - Delete the feature branch after merging.
 
-To build and run using Docker:
+6. **Promoting `development` => `main`:**
+   - Once `development` is stable and tested, open PR from `development` into `main`.
+   - Requires approval from a Code Owner.
+   - Only merge into `main` when the team agrees the code is ready.
 
-```bash
-docker build -t my-app .
+7. **Promoting `main` => `production`:**
+   - Done manually, only when the team intends to "release."
+   - Not part of the regular day-to-day cycle.
 
-# Run the container
-docker run -p 3000:3000 my-app
-```
+## Commit Message Convention
 
-The containerized application can be deployed to any platform that supports Docker, including:
+Keep commit messages short and descriptive. Prefix with a type where possible:
 
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
+- `(feat):` - new feature or file.
+- `(fix):` - bug fix.
+- `(update):` - change to existing functionality.
+- `(refactor):` - code change with no functional difference.
+- `(Docs):` - documentation only.
 
-### DIY Deployment
+Example: `(fix): incorrect balance calculation on transfer`
 
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
+## Pull Request Rules
 
-Make sure to deploy the output of `npm run build`
+- No PR merges into `main` without at least 1 Code owner approval.
+- Keep PRs focused - one feature or fix per PR where possible.
+- Write short description of _what_ changed and _why_.
+- Resolve merge conflicts locally before requesting review.
 
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
+## Getting Help
 
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
+If you're stuck or a push gets rejected due to branch rules, don't force it - open PR instead, or ask in the team chat.
