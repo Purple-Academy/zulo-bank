@@ -81,7 +81,7 @@ Keep commit messages short and descriptive. Prefix with a type where possible:
 - `(fix):` - bug fix.
 - `(update):` - change to existing functionality.
 - `(refactor):` - code change with no functional difference.
-- `(Docs):` - documentation only.
+- `(docs):` - documentation only.
 
 Example: `(fix): incorrect balance calculation on transfer`
 
@@ -89,7 +89,7 @@ Example: `(fix): incorrect balance calculation on transfer`
 
 - No PR merges into `main` without at least 1 Code owner approval.
 - Keep PRs focused - one feature or fix per PR where possible.
-- Write short description of _what_ changed and _why_.
+- Write short description of *what* changed and *why*.
 - Resolve merge conflicts locally before requesting review.
 
 ## Getting Help
