@@ -11,7 +11,7 @@ export function Welcome() {
           <li>HTML :D</li>
         </ul>
         <ol>
-           <li>JavaScript</li>
+          <li>JavaScript</li>
           <li>C#</li>
           <li>C++</li>
           <li>HTML :D</li>
