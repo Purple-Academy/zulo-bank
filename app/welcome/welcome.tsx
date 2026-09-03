@@ -10,13 +10,11 @@ export function Welcome() {
           <li>C++</li>
           <li>HTML :D</li>
         </ul>
-        <br />
-        <p>Select your favorite frameworks and library</p>
         <ol>
-          <li>React</li>
-          <li>Angular</li>
-          <li>NestJS</li>
-          <li>NextJS</li>
+           <li>JavaScript</li>
+          <li>C#</li>
+          <li>C++</li>
+          <li>HTML :D</li>
         </ol>
       </div>
     </main>
