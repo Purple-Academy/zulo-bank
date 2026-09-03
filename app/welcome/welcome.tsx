@@ -5,7 +5,7 @@ export function Welcome() {
        <h1>Hello Devs</h1>
        <p>Select your favorite programming language</p>
        <ul>
-        <li>JavaScript</li>
+        <li>typescript</li>
         <li>C#</li>
         <li>C++</li>
         <li>HTML :D</li>
