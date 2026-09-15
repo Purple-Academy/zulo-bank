@@ -67,7 +67,7 @@ export const SignIn = () => {
       </section>
       <button
         type="submit"
-        className="w-full mt-6 py-3 rounded-lg bg-[#1F2937] text-[16px] font-medium text-white transition-colors hover:bg-[#272835] cursor-pointer"
+        className="w-full mt-6 mb-6 py-3 rounded-lg bg-[#1F2937] text-[16px] font-medium text-white transition-colors hover:bg-[#272835] cursor-pointer"
       >
         Sign In
       </button>
