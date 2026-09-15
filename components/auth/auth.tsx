@@ -19,7 +19,7 @@ export const Auth = () => {
       {isRegister ? <SignUp /> : <SignIn />}
       <div className="flex gap-1.25">
         <p className="text-sm leading-5 text-[#6B7280]">
-          {isRegister ? "Don't have an account?" : "Have an account?"}
+          {isRegister ? "Have an account?" : "Don't have an account?"}
         </p>
         <button
           type="button"
