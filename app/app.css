@@ -1,1 +1,257 @@
 @import "tailwindcss";
+
+/* =========================================================
+   TAILWIND CSS v4 THEME
+   ========================================================= */
+
+@theme {
+  /* -------------------------
+     Colors
+     ------------------------- */
+
+  --color-navy-50: #f0f4fa;
+  --color-navy-100: #dbe4f1;
+  --color-navy-200: #b8c8e3;
+  --color-navy-300: #8aa3d0;
+  --color-navy-400: #5d7cb8;
+  --color-navy-500: #3d5a9b;
+  --color-navy-600: #2c4580;
+  --color-navy-700: #1e3268;
+  --color-navy-800: #15234b;
+  --color-navy-900: #0d1830;
+  --color-navy-950: #070f20;
+
+  --color-electric-50: #eef7ff;
+  --color-electric-100: #d9edff;
+  --color-electric-200: #bce0ff;
+  --color-electric-300: #8ecdff;
+  --color-electric-400: #59b0ff;
+  --color-electric-500: #3393ff;
+  --color-electric-600: #1c75f5;
+  --color-electric-700: #155de8;
+  --color-electric-800: #1849c4;
+  --color-electric-900: #1a3e9e;
+
+  --color-accent-50: #ecfdf5;
+  --color-accent-100: #d1fae5;
+  --color-accent-200: #a7f3d0;
+  --color-accent-300: #6ee7b7;
+  --color-accent-400: #34d399;
+  --color-accent-500: #10b981;
+  --color-accent-600: #059669;
+  --color-accent-700: #047857;
+  --color-accent-800: #065f46;
+  --color-accent-900: #064e3b;
+
+
+  /* -------------------------
+     Fonts
+     ------------------------- */
+
+  --font-sans:
+    "Noto Sans Georgian",
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  --font-display:
+    "Noto Sans Georgian",
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+
+  /* -------------------------
+     Shadows
+     ------------------------- */
+
+  --shadow-premium:
+    0 20px 60px -15px rgba(13, 24, 48, 0.15);
+
+  --shadow-premium-lg:
+    0 30px 80px -20px rgba(13, 24, 48, 0.25);
+
+  --shadow-glow:
+    0 0 40px rgba(51, 147, 255, 0.3);
+
+
+  /* -------------------------
+     Animations
+     ------------------------- */
+
+  --animate-fade-in:
+    fadeIn 0.6s ease-out forwards;
+
+  --animate-slide-up:
+    slideUp 0.7s ease-out forwards;
+
+  --animate-float:
+    float 6s ease-in-out infinite;
+
+  --animate-float-delayed:
+    float 6s ease-in-out 2s infinite;
+
+  --animate-float-slow:
+    float 8s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   KEYFRAMES
+   ========================================================= */
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+
+/* =========================================================
+   BASE
+   ========================================================= */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply font-sans text-navy-900 bg-white;
+
+    font-family:
+      "Noto Sans Georgian",
+      "Plus Jakarta Sans",
+      system-ui,
+      sans-serif;
+
+    margin: 0;
+    min-height: 100vh;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  img,
+  svg,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+
+/* =========================================================
+   CUSTOM UTILITIES
+   ========================================================= */
+
+@layer utilities {
+  /* Glass */
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  /* Dark Glass */
+  .glass-dark {
+    background: rgba(13, 24, 48, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+
+    background-image:
+      linear-gradient(
+        135deg,
+        #3393ff 0%,
+        #155de8 100%
+      );
+  }
+
+  /* Reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+
+    transition:
+      opacity 0.7s ease-out,
+      transform 0.7s ease-out;
+  }
+
+  .reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* 3D */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+}
+
+
+/* =========================================================
+   OPTIONAL: REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
