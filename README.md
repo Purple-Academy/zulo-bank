@@ -1,6 +1,29 @@
 # Zulo Bank
 
-A banking application built as part of our college coursework.
+A modern full-stack online banking web application built as part of our college coursework. Zulo Bank simulates core banking operations including account management, transaction tracking, and interactive financial dashboards.
+
+**Live Application:** [zulo-bank.vercel.app](https://zulo-bank.vercel.app)
+
+---
+
+## Overview
+
+Zulo Bank provides a realistic simulation of a digital banking system. The project demonstrates state management, secure workflow handling, and responsive UI design designed for real-world scenarios.
+
+### Key Features
+
+* **Account Dashboard:** View account balances, recent transaction history, and account status in real-time.
+* **Money Transfers:** Transfer funds between registered internal accounts or external simulated accounts.
+* **Transaction History & Analytics:** Filter, search, and view detailed logs of income and expenses.
+* **Security & Auth:** Protected routing and role-aware UI elements for account actions.
+* **Responsive Design:** Optimized experience across mobile, tablet, and desktop viewports.
+
+---
+
+## Tech Stack
+
+* **Frontend:** ReactJS, Tailwind CSS, TS
+* **Deployment & Hosting:** Vercel
 
 ## Branch Strategy
 
@@ -47,7 +70,7 @@ If you try to `git push origin main` directly, Github will reject it. This is in
 
 ```bash
     git add .
-    git commit -m "(feat): add short description of what changed"
+    git commit -m "feat: add short description of what changed"
 ```
 
 3. **Push your branch:**
@@ -77,13 +100,13 @@ If you try to `git push origin main` directly, Github will reject it. This is in
 
 Keep commit messages short and descriptive. Prefix with a type where possible:
 
-- `(feat):` - new feature or file.
-- `(fix):` - bug fix.
-- `(update):` - change to existing functionality.
-- `(refactor):` - code change with no functional difference.
-- `(docs):` - documentation only.
+- `feat:` - new feature or file.
+- `fix:` - bug fix.
+- `update:` - change to existing functionality.
+- `refactor:` - code change with no functional difference.
+- `docs:` - documentation only.
 
-Example: `(fix): incorrect balance calculation on transfer`
+Example: `fix: incorrect balance calculation on transfer`
 
 ## Pull Request Rules
 
