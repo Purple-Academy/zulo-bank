@@ -33,7 +33,6 @@ This repo uses three long-lived branches:
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | `development` | Active work happens here. All feature branches merge into `development` first. Things can be a bit unstable - that's expected. |
 | `main`        | Stable, reviewed, tested code. Only updated from `development` once things are working. Protected - see below.                 |
-| `production`  | Snapshot of what's actually "live"/deployed. Updated manually and only from `main`, not part of everyday work.                 |
 
 ### Everyday flow
 
