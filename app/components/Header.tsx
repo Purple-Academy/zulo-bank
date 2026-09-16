@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { Menu, X, Landmark } from 'lucide-react';
 
 const NAV_ITEMS = [
-  { label: 'მთავარი', href: '#home' },
-  { label: 'პროდუქტები', href: '#products' },
-  { label: 'სესხები', href: '#loans' },
-  { label: 'ბარათები', href: '#cards' },
-  { label: 'ჩვენ შესახებ', href: '#about' },
+  { label: 'მთავარი', href: 'home' },
+  { label: 'პროდუქტები', href: 'products' },
+  { label: 'სესხები', href: 'loans' },
+  { label: 'ბარათები', href: 'cards' },
+  { label: 'ჩვენ შესახებ', href: 'about' },
 ];
 
 export default function Header() {
