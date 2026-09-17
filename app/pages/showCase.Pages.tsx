@@ -1,8 +1,8 @@
-export default function CardShowCase() {
+export default function ShowCase() {
   return (
     <main className="flex items-center justify-center pt-16 pb-4">
       <div className="flex-1 flex flex-col items-center gap-16 min-h-0">
-       <h1>cardShowerCase</h1>
+       <h1>ShowCase</h1>
       </div>
     </main>
   );

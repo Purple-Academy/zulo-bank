@@ -1,4 +1,4 @@
-import CardsShowcase from "~/components/CardShowCase";
+import Showcase from "~/components/ShowCase";
 import CTA from "~/components/CTA";
 import Footer from "~/components/Footer";
 import Header from "~/components/Header";
@@ -21,7 +21,7 @@ export function Welcome() {
         <Products />
         <Stats />
         <Loans />
-        <CardsShowcase />
+        <Showcase />
         <MobileBanking />
         <Security />
         <Testimonials />

@@ -1,13 +1,14 @@
 import type { Route } from "./+types/home";
-import CardShowCase from '../pages/cardShowCase';
+import ShowCase from '../pages/ShowCase.Pages';
 
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "zulo-bank | home" },
-    { name: "description", content: "Welcome to React Router!" },
+    { name: "description", content: "Welcome  zulo-bank!" },
+
   ];
 }
 
 export default function Home() {
-  return <CardShowCase />;
+  return <ShowCase />;
 }
