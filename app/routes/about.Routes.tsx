@@ -3,8 +3,8 @@ import type { Route } from "./+types/home";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "zulo-bank | about" },
-    { name: "description", content: "Welcome  zulo-bank!" },
+    { name: "about", content:"Learn more about Zulo Bank, our mission, values, and modern approach to banking.",
+    },
   ];
 }
 
