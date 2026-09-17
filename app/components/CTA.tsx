@@ -7,7 +7,6 @@ export default function CTA() {
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <RevealOnScroll>
           <div className="relative rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-electric-600 via-electric-700 to-navy-800 p-8 sm:p-12 lg:p-20 shadow-premium-lg text-center">
-            {/* Decorative elements */}
             <div className="absolute inset-0 pointer-events-none">
               <div className="absolute top-0 left-1/4 w-72 h-72 rounded-full bg-white/10 blur-3xl" />
               <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full bg-accent-400/15 blur-3xl" />
