@@ -1,10 +1,18 @@
 import { FaUser } from "react-icons/fa";
+import { useNavigate } from "react-router";
 import { SignIn } from "./signIn";
 import { SignUp } from "./signUp";
-import { useState } from "react";
 
-export const Auth = () => {
-  const [isRegister, setIsRegister] = useState(false);
+type AuthMode = "sign-in" | "sign-up";
+
+export const Auth = ({ mode }: { mode: AuthMode }) => {
+  const navigate = useNavigate();
+  const isRegister = mode === "sign-up";
+
+  const toggleAuthMode = () => {
+    navigate(isRegister ? "/auth/sign-in" : "/auth/sign-up");
+  };
+
   return (
     <div className="flex flex-col justify-start items-center w-full max-w-md rounded-xl shadow-[0px_10px_15px_0px_#0000001A] border border-[#E5E7EB] p-8">
       <div className="flex justify-center items-center w-20 h-20 rounded-full bg-[#F3F4F6] relative">
@@ -16,7 +24,9 @@ export const Auth = () => {
           <span className="text-[#E5E7EB] text-sm leading-none">+</span>
         </button>
       </div>
+
       {isRegister ? <SignUp /> : <SignIn />}
+
       <div className="flex gap-1.25">
         <p className="text-sm leading-5 text-[#6B7280]">
           {isRegister ? "Have an account?" : "Don't have an account?"}
@@ -24,7 +34,7 @@ export const Auth = () => {
         <button
           type="button"
           className="text-sm leading-5 text-[#1A1A1A] hover:underline cursor-pointer"
-          onClick={() => setIsRegister((prev) => !prev)}
+          onClick={toggleAuthMode}
         >
           {isRegister ? "Sign in" : "Sign up"}
         </button>
