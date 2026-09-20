@@ -1,11 +1,13 @@
+import ShowCase from "~/pages/showCase.Pages";
 import type { Route } from "./+types/home";
-import ShowCase from '../pages/ShowCase.Pages';
 
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "zulo-bank | home" },
-    {name: "keywords", content: "Zulo Bank, digital banking, online banking, finance",}
-
+    {
+      name: "keywords",
+      content: "Zulo Bank, digital banking, online banking, finance",
+    },
   ];
 }
 
