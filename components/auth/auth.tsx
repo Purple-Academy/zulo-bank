@@ -10,7 +10,7 @@ export const Auth = ({ mode }: { mode: AuthMode }) => {
   const isRegister = mode === "sign-up";
 
   const toggleAuthMode = () => {
-    navigate(isRegister ? "/auth/sign-in" : "/auth/sign-up");
+    navigate(isRegister ? "/sign-in" : "/sign-up");
   };
 
   return (
