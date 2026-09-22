@@ -1,0 +1,33 @@
+name: CI
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{github.ref}}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: Lint, Type Check, Test, Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'npm'
+      - name: Install Dependencies
+        run: npm ci
+      - name: Lint
+        run: npm run lint || (echo "### Lint Failed" >> $GITHUB_STEP_SUMMARY && exit 1)
+      - name: Type Check
+        run: npx tsc --noEmit || (echo "### Type Check Failed" >> $GITHUB_STEP_SUMMARY && exit 1)
+      - name: Build
+        run: npm run build || (echo "### Build failed" >> $GITHUB_STEP_SUMMARY && exit 1)
