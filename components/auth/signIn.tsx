@@ -8,21 +8,31 @@ import {
   inputBorderClass,
   ValidatedField,
 } from "./ValidatedField";
+import { useAuth } from "~/hooks/auth-context";
+import { useNavigate } from "react-router";
 
 export const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    setError,
+    formState: { errors, isSubmitting },
   } = useForm<SignInValues>({
     resolver: zodResolver(signInSchema),
     mode: "onSubmit",
   });
 
-  const onSubmit = (data: SignInValues) => {
-    console.log("Sign in submit:", data);
+  const onSubmit = async (data: SignInValues) => {
+    const res = await login(data.email, data.password);
+    if (!res.ok) {
+      setError("root", { message: res.error });
+      return;
+    }
+    navigate("/");
   };
 
   return (
@@ -115,9 +125,10 @@ export const SignIn = () => {
       </section>
       <button
         type="submit"
-        className="w-full mt-6 mb-6 py-3 rounded-lg bg-[#1F2937] text-[16px] font-medium text-white transition-colors hover:bg-[#272835] cursor-pointer"
+        disabled={isSubmitting}
+        className="w-full mt-6 mb-6 py-3 rounded-lg bg-[#1F2937] text-[16px] font-medium text-white transition-colors hover:bg-[#272835] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        Sign In
+        {isSubmitting ? "Signing in..." : "Sign In"}
       </button>
     </form>
   );

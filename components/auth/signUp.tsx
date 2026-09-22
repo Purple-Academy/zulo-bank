@@ -17,22 +17,32 @@ import {
   inputBorderClass,
   ValidatedField,
 } from "./ValidatedField";
+import { useNavigate } from "react-router";
+import { useAuth } from "~/hooks/auth-context";
 
 export const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const { register: registerUser } = useAuth();
+  const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    setError,
+    formState: { errors, isSubmitting },
   } = useForm<SignUpValues>({
     resolver: zodResolver(signUpSchema),
     mode: "onSubmit",
   });
 
-  const onSubmit = (data: SignUpValues) => {
-    console.log("Sign up submit:", data);
+  const onSubmit = async (data: SignUpValues) => {
+    const res = await registerUser(data.name, data.email, data.password);
+    if (!res.ok) {
+      setError("root", { message: res.error });
+      return;
+    }
+    navigate("/");
   };
 
   return (
@@ -251,9 +261,10 @@ export const SignUp = () => {
 
       <button
         type="submit"
-        className="w-full mt-6 mb-6 py-3 rounded-lg bg-[#1F2937] text-[16px] font-medium text-white transition-colors hover:bg-[#272835] cursor-pointer"
+        disabled={isSubmitting}
+        className="w-full mt-6 mb-6 py-3 rounded-lg bg-[#1F2937] text-[16px] font-medium text-white transition-colors hover:bg-[#272835] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        Sign Up
+        {isSubmitting ? "Signing up..." : "Sign Up"}
       </button>
     </form>
   );
