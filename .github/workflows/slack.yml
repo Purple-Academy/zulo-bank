@@ -1,0 +1,21 @@
+name: Slack Notifications
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, reopened, ready_for_review]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Slack Notification
+        uses: slackapi/slack-github-action@v4.0.0
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "text": ":white_check_mark: ${{ github.event_name }} to ${{ github.repository }}\nBranch: `${{ github.ref_name }}`\nAuthor: ${{ github.actor }}\nLink: ${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+            }
