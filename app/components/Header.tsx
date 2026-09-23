@@ -53,7 +53,7 @@ export default function Header() {
         </ul>
 
         <div className="hidden md:block">
-          <Link to="/auth/sign-in">
+          <Link to="/sign-in">
             <button className="px-6 py-2.5 rounded-xl bg-navy-900 text-white text-sm font-semibold hover:bg-electric-600 transition-all hover:shadow-glow hover:-translate-y-0.5">
               შესვლა
             </button>
@@ -85,7 +85,7 @@ export default function Header() {
               {item.label}
             </a>
           ))}
-          <Link to="/auth/sign-in">
+          <Link to="/sign-in">
             <button className="w-full mt-2 px-6 py-3 rounded-xl bg-navy-900 text-white text-sm font-semibold">
               შესვლა
             </button>
