@@ -22,12 +22,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: 'npm'
+          cache: "npm"
       - name: Install Dependencies
         run: npm ci
       - name: Lint
         run: npm run lint || (echo "### Lint Failed" >> $GITHUB_STEP_SUMMARY && exit 1)
       - name: Type Check
-        run: npx tsc --noEmit || (echo "### Type Check Failed" >> $GITHUB_STEP_SUMMARY && exit 1)
+        run: npm run typecheck || (echo "### Type Check Failed" >> $GITHUB_STEP_SUMMARY && exit 1)
       - name: Build
         run: npm run build || (echo "### Build failed" >> $GITHUB_STEP_SUMMARY && exit 1)

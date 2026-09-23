@@ -1,5 +1,5 @@
 import ShowCase from "~/pages/showCase.Pages";
-import type { Route } from "./+types/home";
+import type { Route } from "./+types/ShowCase.Routes";
 
 export function meta({}: Route.MetaArgs) {
   return [

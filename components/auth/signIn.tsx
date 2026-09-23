@@ -1,11 +1,47 @@
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { FaEnvelope, FaEye, FaEyeSlash, FaLock } from "react-icons/fa";
+import { signInSchema, type SignInValues } from "./auth.validation";
+import {
+  inputBaseClass,
+  inputBorderClass,
+  ValidatedField,
+} from "./ValidatedField";
+import { useAuth } from "~/hooks/auth-context";
+import { useNavigate } from "react-router";
 
 export const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors, isSubmitting },
+  } = useForm<SignInValues>({
+    resolver: zodResolver(signInSchema),
+    mode: "onSubmit",
+  });
+
+  const onSubmit = async (data: SignInValues) => {
+    const res = await login(data.email, data.password);
+    if (!res.ok) {
+      setError("root", { message: res.error });
+      return;
+    }
+    navigate("/");
+  };
 
   return (
-    <form className="w-full" aria-labelledby="sign-in-title">
+    <form
+      className="w-full"
+      aria-labelledby="sign-in-title"
+      onSubmit={handleSubmit(onSubmit)}
+      noValidate
+    >
       <section className="mt-6 text-center">
         <h2
           id="sign-in-title"
@@ -19,55 +55,61 @@ export const SignIn = () => {
         </p>
       </section>
 
-      <div className="w-full relative mt-8">
-        <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280] text-[16px]" />
-        <label htmlFor="sign-in-email" className="sr-only">
-          Email address
-        </label>
+      <ValidatedField error={errors.email} className="mt-8">
+        <div className="relative">
+          <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280] text-[16px]" />
+          <label htmlFor="sign-in-email" className="sr-only">
+            Email address
+          </label>
 
-        <input
-          id="sign-in-email"
-          name="email"
-          type="email"
-          autoComplete="email"
-          placeholder="nunezserigala@gmail.com"
-          className="w-full h-12.5 rounded-[11px] border border-[#E5E7EB] bg-white pl-10 pr-4 text-[16px] text-[#272835] outline-none placeholder:text-[#6B7280] focus:border-[#1F2937]"
-        />
-      </div>
-      <div className="w-full relative mt-6 mb-6">
-        <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280] text-[16px]" />
-        <label htmlFor="sign-in-password" className="sr-only">
-          Password
-        </label>
+          <input
+            id="sign-in-email"
+            type="email"
+            autoComplete="email"
+            placeholder="nunezserigala@gmail.com"
+            aria-invalid={!!errors.email}
+            className={`${inputBaseClass} ${inputBorderClass(!!errors.email)}`}
+            {...register("email")}
+          />
+        </div>
+      </ValidatedField>
 
-        <input
-          id="sign-in-password"
-          name="password"
-          type={showPassword ? "text" : "password"}
-          autoComplete="current-password"
-          placeholder="12345678901234567890"
-          className="w-full h-12.5 rounded-[11px] border border-[#E5E7EB] bg-white pl-10 pr-4 text-[16px] text-[#272835] outline-none placeholder:text-[#6B7280] focus:border-[#1F2937]"
-        />
+      <ValidatedField error={errors.password} className="mt-6 mb-6">
+        <div className="relative">
+          <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280] text-[16px]" />
+          <label htmlFor="sign-in-password" className="sr-only">
+            Password
+          </label>
 
-        <button
-          type="button"
-          onClick={() => setShowPassword((prev) => !prev)}
-          className="absolute right-4 top-1/2 -translate-y-1/2 text-[#6B7280]"
-          aria-label={showPassword ? "Hide password" : "Show password"}
-        >
-          {showPassword ? (
-            <FaEyeSlash className=" text-[16px] cursor-pointer" />
-          ) : (
-            <FaEye className=" text-[16px] cursor-pointer" />
-          )}
-        </button>
-      </div>
+          <input
+            id="sign-in-password"
+            type={showPassword ? "text" : "password"}
+            autoComplete="current-password"
+            placeholder="Password"
+            aria-invalid={!!errors.password}
+            className={`${inputBaseClass} ${inputBorderClass(!!errors.password)}`}
+            {...register("password")}
+          />
+
+          <button
+            type="button"
+            onClick={() => setShowPassword((prev) => !prev)}
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-[#6B7280]"
+            aria-label={showPassword ? "Hide password" : "Show password"}
+          >
+            {showPassword ? (
+              <FaEyeSlash className="text-[16px] cursor-pointer" />
+            ) : (
+              <FaEye className="text-[16px] cursor-pointer" />
+            )}
+          </button>
+        </div>
+      </ValidatedField>
 
       <section className="flex items-center justify-between">
         <label className="flex cursor-pointer items-center gap-1.75">
           <input
             id="sign-in-remember"
-            name="remember"
             type="checkbox"
             className="w-5 h-5 rounded-md cursor-pointer accent-[#0D0D12]"
           />
@@ -83,9 +125,10 @@ export const SignIn = () => {
       </section>
       <button
         type="submit"
-        className="w-full mt-6 mb-6 py-3 rounded-lg bg-[#1F2937] text-[16px] font-medium text-white transition-colors hover:bg-[#272835] cursor-pointer"
+        disabled={isSubmitting}
+        className="w-full mt-6 mb-6 py-3 rounded-lg bg-[#1F2937] text-[16px] font-medium text-white transition-colors hover:bg-[#272835] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        Sign In
+        {isSubmitting ? "Signing in..." : "Sign In"}
       </button>
     </form>
   );
